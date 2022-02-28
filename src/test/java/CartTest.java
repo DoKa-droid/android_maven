@@ -25,7 +25,7 @@ public class CartTest extends BaseTest {
     }
 
     @Test
-    void addToCartTest() throws InterruptedException, AWTException {
+    void addToCartTest() throws InterruptedException {
         AppPage appPage = new AppPage(driver);
         appPage.initialize();
         appPage.signIn(Constants.CREDENTIALS.EMAIL, Constants.CREDENTIALS.PASSWORD);
@@ -33,7 +33,7 @@ public class CartTest extends BaseTest {
         appPage.searchProduct(Constants.PRODUCTS.PRODUCT_NAME);
 
         appPage.clickAddToCart();
-        appPage.goToCart();
+        appPage.clickGoToCartButton();
 
         Assertions.assertTrue(appPage.isProductInCart());
     }
@@ -46,7 +46,7 @@ public class CartTest extends BaseTest {
         appPage.goToCart();
 
         appPage.clickDelete();
-        Assertions.assertFalse(appPage.isProductInCart());
+        Assertions.assertFalse(appPage.isCartEmpty());
     }
 
     @Test
@@ -58,7 +58,6 @@ public class CartTest extends BaseTest {
 
         totalPrice += appPage.getPrice();
         appPage.clickAddToCart();
-        appPage.clickNotGoToCart();
         totalPrice += appPage.getPrice();
         appPage.clickAddToCart();
         appPage.goToCart();
@@ -75,9 +74,9 @@ public class CartTest extends BaseTest {
 
         appPage.goToCart();
 
-        totalAmount = appPage.amountOfProductsOnCartImage();
+        totalAmount = 2;
 
-        productsInCart = appPage.amountOfProductsOnCartPage();
+        productsInCart = appPage.amountOfProductsInCart();
         Assertions.assertEquals(totalAmount, productsInCart);
     }
 
@@ -86,11 +85,10 @@ public class CartTest extends BaseTest {
         AppPage appPage = new AppPage(driver);
 
         appPage.signIn(Constants.CREDENTIALS.EMAIL, Constants.CREDENTIALS.PASSWORD);
-
         appPage.goToCart();
-
         appPage.clickaddToFavorites();
-        Assertions.assertTrue(appPage.isProductInFavorites());
+        appPage.goToFavorites();
+        Assertions.assertTrue(appPage.isProductInCart());
     }
 
     @Test
