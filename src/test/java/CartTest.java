@@ -2,104 +2,111 @@ import com.example.common.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
-
 public class CartTest extends BaseTest {
 
     @Test
     void isItCartTest() throws InterruptedException {
         AppPage appPage = new AppPage(driver);
+        CartPage cartPage = new CartPage(driver);
         appPage.initialize();
         appPage.signIn(Constants.CREDENTIALS.EMAIL, Constants.CREDENTIALS.PASSWORD);
         appPage.goToCart();
-        Assertions.assertTrue(appPage.isItCart());
+        Assertions.assertTrue(cartPage.isItCart());
     }
 
     @Test
     void emptyCartTest() throws InterruptedException {
         AppPage appPage = new AppPage(driver);
+        CartPage cartPage = new CartPage(driver);
         appPage.initialize();
         appPage.signIn(Constants.CREDENTIALS.EMAIL, Constants.CREDENTIALS.PASSWORD);
         appPage.goToCart();
-        Assertions.assertTrue(appPage.isCartEmpty());
+        Assertions.assertTrue(cartPage.isCartEmpty());
     }
 
     @Test
-    void addToCartTest() throws InterruptedException, AWTException {
+    void addToCartTest() throws InterruptedException {
         AppPage appPage = new AppPage(driver);
+        CartPage cartPage = new CartPage(driver);
+        SearchResultPage searchPage = new SearchResultPage(driver);
+        ProductPage productPage = new ProductPage(driver);
         appPage.initialize();
         appPage.signIn(Constants.CREDENTIALS.EMAIL, Constants.CREDENTIALS.PASSWORD);
 
-        appPage.searchProduct(Constants.PRODUCTS.PRODUCT_NAME);
+        searchPage.searchProduct(Constants.PRODUCTS.PRODUCT_NAME);
 
-        appPage.clickAddToCart();
-        appPage.goToCart();
+        productPage.clickAddToCart();
+        productPage.clickGoToCartButton();
 
-        Assertions.assertTrue(appPage.isProductInCart());
+        Assertions.assertTrue(cartPage.isProductInCart());
     }
 
     @Test
-    void deleteFromCartTest() throws InterruptedException, AWTException {
+    void deleteFromCartTest() throws InterruptedException {
         AppPage appPage = new AppPage(driver);
+        CartPage cartPage = new CartPage(driver);
 
         appPage.signIn(Constants.CREDENTIALS.EMAIL, Constants.CREDENTIALS.PASSWORD);
         appPage.goToCart();
 
-        appPage.clickDelete();
-        Assertions.assertFalse(appPage.isProductInCart());
+        cartPage.clickDelete();
+        Assertions.assertFalse(cartPage.isCartEmpty());
     }
 
     @Test
     void totalCostTest() throws InterruptedException {
         int totalPrice = 0;
         AppPage appPage = new AppPage(driver);
+        CartPage cartPage = new CartPage(driver);
+        SearchResultPage searchPage = new SearchResultPage(driver);
+        ProductPage productPage = new ProductPage(driver);
 
         appPage.signIn(Constants.CREDENTIALS.EMAIL, Constants.CREDENTIALS.PASSWORD);
 
-        totalPrice += appPage.getPrice();
-        appPage.clickAddToCart();
-        appPage.clickNotGoToCart();
-        totalPrice += appPage.getPrice();
-        appPage.clickAddToCart();
-        appPage.goToCart();
+        searchPage.searchProduct(Constants.PRODUCTS.PRODUCT_NAME);
+        totalPrice += productPage.getPrice();
+        productPage.clickAddToCart();
+        totalPrice += productPage.getPrice();
+        productPage.clickAddToCart();
+        productPage.clickGoToCartButton();
 
-        Assertions.assertEquals(totalPrice, appPage.getTotalSum());
+        Assertions.assertEquals(totalPrice, cartPage.getTotalSum());
     }
 
     @Test
     void amountOfProductsTest() throws InterruptedException {
         int totalAmount, productsInCart;
         AppPage appPage = new AppPage(driver);
+        CartPage cartPage = new CartPage(driver);
 
         appPage.signIn(Constants.CREDENTIALS.EMAIL, Constants.CREDENTIALS.PASSWORD);
 
         appPage.goToCart();
-
-        totalAmount = appPage.amountOfProductsOnCartImage();
-
-        productsInCart = appPage.amountOfProductsOnCartPage();
+        totalAmount = 2;
+        productsInCart = cartPage.amountOfProductsInCart();
         Assertions.assertEquals(totalAmount, productsInCart);
     }
 
     @Test
-    void addToFavoritesTest() throws InterruptedException, AWTException {
+    void addToFavoritesTest() throws InterruptedException {
         AppPage appPage = new AppPage(driver);
+        CartPage cartPage = new CartPage(driver);
 
         appPage.signIn(Constants.CREDENTIALS.EMAIL, Constants.CREDENTIALS.PASSWORD);
-
         appPage.goToCart();
-
-        appPage.clickaddToFavorites();
-        Assertions.assertTrue(appPage.isProductInFavorites());
+        cartPage.clickaddToFavorites();
+        cartPage.goToFavorites();
+        Assertions.assertTrue(cartPage.isProductInCart());
     }
 
     @Test
     void productInformationTest() throws InterruptedException {
         AppPage appPage = new AppPage(driver);
+        CartPage cartPage = new CartPage(driver);
 
         appPage.signIn(Constants.CREDENTIALS.EMAIL, Constants.CREDENTIALS.PASSWORD);
         appPage.goToCart();
-        Assertions.assertTrue(appPage.isAllProductInfoPresent());
+        Assertions.assertTrue(cartPage.isAllProductInfoPresent());
     }
 
 }
