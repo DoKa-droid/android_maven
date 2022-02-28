@@ -56,11 +56,12 @@ public class CartTest extends BaseTest {
 
         appPage.signIn(Constants.CREDENTIALS.EMAIL, Constants.CREDENTIALS.PASSWORD);
 
+        appPage.searchProduct(Constants.PRODUCTS.PRODUCT_NAME);
         totalPrice += appPage.getPrice();
         appPage.clickAddToCart();
         totalPrice += appPage.getPrice();
         appPage.clickAddToCart();
-        appPage.goToCart();
+        appPage.clickGoToCartButton();
 
         Assertions.assertEquals(totalPrice, appPage.getTotalSum());
     }
@@ -73,9 +74,7 @@ public class CartTest extends BaseTest {
         appPage.signIn(Constants.CREDENTIALS.EMAIL, Constants.CREDENTIALS.PASSWORD);
 
         appPage.goToCart();
-
         totalAmount = 2;
-
         productsInCart = appPage.amountOfProductsInCart();
         Assertions.assertEquals(totalAmount, productsInCart);
     }

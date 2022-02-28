@@ -23,18 +23,18 @@ public class AppPage {
     SelenideElement cartSideMenuButton = $(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.RelativeLayout[2]"));
     SelenideElement cartProductButton = $(By.id("com.asos.app:id/bag_fab"));
     SelenideElement emailField = $(By.id("EmailAddress"));
-    SelenideElement passwordField = $(By.xpath("Password"));
-    SelenideElement signInButton = $(By.xpath("signin"));
+    SelenideElement passwordField = $(By.id("Password"));
+    SelenideElement signInButton = $(By.id("signin"));
     SelenideElement iAmNotRobotButton = $(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout[2]/android.webkit.WebView/android.view.View/android.view.View[1]/android.view.View/android.view.View/android.view.View[4]/android.view.View/android.widget.Button"));
-    SelenideElement cartToolbarTitle = $(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.TextView"));
-    SelenideElement emptyCartImage = $(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.TextView"));
-    SelenideElement mainPageSideMenuButton = $(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.RelativeLayout[1]"));
-    SelenideElement searchField = $(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.EditText"));
-    SelenideElement productIcon = $(By.xpath("//android.widget.LinearLayout[@content-desc='Тушь для ресниц Revolution 5D Lash; 890,00 руб.']"));
+    SelenideElement cartToolbarTitle = $(By.id("com.asos.app:id/bag_toolbar_tile"));
+    SelenideElement emptyCartImage = $(By.id("com.asos.app:id/bag_empty_message_when_expired_items"));
+    SelenideElement sideMenuMainPageButton = $(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.widget.RelativeLayout[1]"));
+    SelenideElement searchField = $(By.id("com.asos.app:id/search_edit_text"));
+    SelenideElement productIcon = $(By.xpath("//android.widget.LinearLayout[@content-desc='Тушь для ресниц Revolution 5D Lash; 690,00 руб. снижена с 890,00 руб. (-22%)']"));
     SelenideElement addToCartButton = $(By.xpath("//android.widget.FrameLayout[@content-desc='Добавить в корзину']/android.widget.Button"));
     SelenideElement name = $(By.xpath("name")).shouldHave(exactText(Constants.PRODUCTS.PRODUCT_NAME));
-    SelenideElement price = $(By.id("com.asos.app:id/bag_item_price"));
-    SelenideElement image = $(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.ImageView"));
+    SelenideElement price = $(By.id("com.asos.app:id/product_details_price_text"));
+    SelenideElement image = $(By.id("com.asos.app:id/bag_item_image"));
     SelenideElement deleteButton = $(By.xpath("(//android.widget.ImageView[@content-desc='УДАЛИТЬ'])[1]"));
     SelenideElement addToFavoritesButton = $(By.id("com.asos.app:id/bag_item_move_to_saved_button"));
     SelenideElement productProperties = $(By.id("com.asos.app:id/bag_item_properties_text"));
@@ -63,8 +63,8 @@ public class AppPage {
         if ($(iAmNotRobotButton).exists()){
             $(iAmNotRobotButton).click();
         }
-        if ($(mainPageSideMenuButton).exists()){
-            $(mainPageSideMenuButton).click();
+        if ($(sideMenuMainPageButton).exists()){
+            $(sideMenuMainPageButton).click();
         }
     }
 
@@ -113,7 +113,7 @@ public class AppPage {
         calculatedSum = $(price).getText();
         calculatedSum = calculatedSum.replace("\r\n", "");
         calculatedSum = calculatedSum.replace(" ", "");
-        return Integer.valueOf(calculatedSum.substring(0, 3));
+        return Integer.valueOf(calculatedSum.substring(0, 2));
     }
 
     public void clickDelete() throws InterruptedException {
@@ -149,7 +149,7 @@ public class AppPage {
         calculatedSum = $(finalCart).getText();
         calculatedSum = calculatedSum.replace("\r\n", "");
         calculatedSum = calculatedSum.replace(" ", "");
-        return Integer.valueOf(calculatedSum.substring(0, 2));
+        return Integer.valueOf(calculatedSum.substring(0, 3));
     }
 
     public int amountOfProductsInCart() {
