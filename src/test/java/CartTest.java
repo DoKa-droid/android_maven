@@ -2,8 +2,6 @@ import com.example.common.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
-
 public class CartTest extends BaseTest {
 
     @Test
