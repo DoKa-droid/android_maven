@@ -20,20 +20,20 @@ public class ProductPage {
 
     public void clickGoToCartButton() throws InterruptedException {
         Thread.sleep(2000);
-        $(cartProductButton).click();
+        cartProductButton.click();
     }
     public void clickAddToCart() throws InterruptedException {
         Thread.sleep(2000);
         TouchActions action = new TouchActions(driver);
-        action.scroll($(addToCartButton), 10, 500);
+        action.scroll(addToCartButton, 10, 500);
         action.perform();
-        $(addToCartButton).click();
+        addToCartButton.click();
     }
 
     public int getPrice() throws InterruptedException {
         String calculatedSum;
         Thread.sleep(2000);
-        calculatedSum = $(price).getText();
+        calculatedSum = price.getText();
         calculatedSum = calculatedSum.replace("\r\n", "");
         calculatedSum = calculatedSum.replace(" ", "");
         return Integer.valueOf(calculatedSum.substring(0, 2));

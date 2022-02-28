@@ -33,30 +33,28 @@ public class AppPage {
 
     public void signIn(String email, String password) throws InterruptedException {
         Thread.sleep(2000);
-        $(sideMenu).click();
+        sideMenu.click();
         Thread.sleep(2000);
-        $(signInSideMenuButton).click();
+        signInSideMenuButton.click();
         Thread.sleep(2000);
-        $(emailField).sendKeys(email);
+        emailField.sendKeys(email);
         Thread.sleep(2000);
-        $(passwordField).sendKeys(password);
+        passwordField.sendKeys(password);
         Thread.sleep(2000);
-        $(signInButton).click();
+        signInButton.click();
         Thread.sleep(2000);
-        if ($(iAmNotRobotButton).exists()) {
-            $(iAmNotRobotButton).click();
+        if (iAmNotRobotButton.exists()) {
+            iAmNotRobotButton.click();
         }
-        if ($(sideMenuMainPageButton).exists()) {
-            $(sideMenuMainPageButton).click();
+        if (sideMenuMainPageButton.exists()) {
+            sideMenuMainPageButton.click();
         }
     }
 
     public void goToCart() throws InterruptedException {
         Thread.sleep(2000);
-        $(sideMenu).click();
+        sideMenu.click();
         Thread.sleep(2000);
-        $(cartSideMenuButton).click();
+        cartSideMenuButton.click();
     }
-
-
 }

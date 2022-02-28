@@ -27,32 +27,32 @@ public class CartPage {
 
     public boolean isItCart() throws InterruptedException {
         Thread.sleep(2000);
-        return $(cartToolbarTitle).exists();
+        return cartToolbarTitle.exists();
     }
 
     public boolean isCartEmpty() throws InterruptedException {
         Thread.sleep(2000);
-        return $(emptyCartImage).exists();
+        return emptyCartImage.exists();
     }
 
     public void clickDelete() throws InterruptedException {
         Thread.sleep(2000);
-        $(deleteButton).click();
+        deleteButton.click();
     }
 
     public void clickaddToFavorites() throws InterruptedException {
         Thread.sleep(2000);
-        $(addToFavoritesButton).click();
+        addToFavoritesButton.click();
     }
 
     public void goToFavorites() {
-        $(goToFavoritesButton).click();
+        goToFavoritesButton.click();
     }
 
     public int getTotalSum() throws InterruptedException {
         String calculatedSum;
         Thread.sleep(2000);
-        calculatedSum = $(finalCart).getText();
+        calculatedSum = finalCart.getText();
         calculatedSum = calculatedSum.replace("\r\n", "");
         calculatedSum = calculatedSum.replace(" ", "");
         return Integer.valueOf(calculatedSum.substring(0, 3));
@@ -60,18 +60,18 @@ public class CartPage {
 
     public boolean isAllProductInfoPresent() throws InterruptedException {
         Thread.sleep(2000);
-        return ($(image).exists()
-                && $(name).exists()
-                && $(productProperties).exists()
-                && $(price).exists());
+        return (image.exists()
+                && name.exists()
+                && productProperties.exists()
+                && price.exists());
     }
 
     public boolean isProductInCart() throws InterruptedException {
         Thread.sleep(2000);
-        return $(name).exists();
+        return name.exists();
     }
 
     public int amountOfProductsInCart() {
-        return Integer.parseInt($(productProperties).getText().substring(41));
+        return Integer.parseInt(productProperties.getText().substring(41));
     }
 }

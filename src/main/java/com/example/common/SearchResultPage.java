@@ -19,10 +19,10 @@ public class SearchResultPage {
 
     public void searchProduct(String query) throws InterruptedException {
         Thread.sleep(2000);
-        $(searchButton).click();
+        searchButton.click();
         Thread.sleep(2000);
-        $(searchField).setValue(query).pressEnter();
+        searchField.setValue(query).pressEnter();
         Thread.sleep(2000);
-        $(productIcon).click();
+        productIcon.click();
     }
 }
