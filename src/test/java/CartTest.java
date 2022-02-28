@@ -44,7 +44,7 @@ public class CartTest extends BaseTest {
     }
 
     @Test
-    void deleteFromCartTest() throws InterruptedException, AWTException {
+    void deleteFromCartTest() throws InterruptedException {
         AppPage appPage = new AppPage(driver);
         CartPage cartPage = new CartPage(driver);
 
@@ -90,7 +90,7 @@ public class CartTest extends BaseTest {
     }
 
     @Test
-    void addToFavoritesTest() throws InterruptedException, AWTException {
+    void addToFavoritesTest() throws InterruptedException {
         AppPage appPage = new AppPage(driver);
         CartPage cartPage = new CartPage(driver);
 
