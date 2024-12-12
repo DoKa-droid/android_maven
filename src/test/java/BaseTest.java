@@ -14,10 +14,8 @@ public class BaseTest {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         capabilities.setCapability("platformName", "Android");
-        //capabilities.setCapability("deviceName", "AndroidTestDevice");
         capabilities.setCapability("platformVersion", "10.0");
         capabilities.setCapability("appPackage", "com.asos.app");
-        //capabilities.setCapability("appActivity", "ui.activities.SplashActivity");
         capabilities.setCapability("app", "C:\\Users\\Kate-\\Downloads\\com.asos.app_4.64.0-12710_minAPI21(arm64-v8a,armeabi-v7a,x86,x86_64)(nodpi).apk");
         capabilities.setCapability("fullReset", true);
         capabilities.setCapability("automationName", "UIAutomator2");
